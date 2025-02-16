@@ -1,31 +1,26 @@
-import { useState, useMemo } from 'react';
-import { StaticImageData } from 'next/image';
-
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  servings: string;
-  image: StaticImageData | string;
-}
+import { useState } from 'react';
+import { Product } from '../types/Product';
 
 export function useSort(items: Product[]) {
   const [sortOption, setSortOption] = useState('featured');
 
-  const sortedItems = useMemo(() => {
-    const itemsCopy = [...items];
-    
+  const sortedItems = [...items].sort((a, b) => {
     switch (sortOption) {
       case 'name':
-        return itemsCopy.sort((a, b) => a.name.localeCompare(b.name));
+        return a.name.localeCompare(b.name);
+      
       case 'price-asc':
-        return itemsCopy.sort((a, b) => a.price - b.price);
+        return a.price - b.price;
+      
       case 'price-desc':
-        return itemsCopy.sort((a, b) => b.price - a.price);
+        return b.price - a.price;
+      
+      case 'featured':
       default:
-        return itemsCopy;
+        // For featured, maintain original order
+        return items.indexOf(a) - items.indexOf(b);
     }
-  }, [items, sortOption]);
+  });
 
   return { sortedItems, sortOption, setSortOption };
 } 
