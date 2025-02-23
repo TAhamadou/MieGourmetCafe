@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Image from "next/image";
 import { StaticImageData } from 'next/image';
+import logo from '../../public/images/logo/Mie-Logo.svg';
 
 interface GalleryImage {
   src: StaticImageData;
@@ -25,6 +26,17 @@ export default function HeroCarousel({ images }: HeroCarouselProps) {
 
   return (
     <div className="relative h-[600px]">
+      {/* Logo in bottom right corner */}
+      <div className="absolute bottom-8 right-8 z-10 w-24 h-24">
+        <Image
+          src={logo}
+          alt="Mie Gourmet Logo"
+          width={96}
+          height={96}
+          className="drop-shadow-lg brightness-0 invert"
+        />
+      </div>
+
       {images.map((image, index) => (
         <div
           key={index}

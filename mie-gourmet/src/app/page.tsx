@@ -7,12 +7,13 @@ import ProductGrid from '../components/ProductGrid';
 import Footer from '../components/Footer';
 import Cart from '../components/Cart';
 import { products } from '@/data/products';
+import Image from "next/image";
+import logo from '../../public/images/logo/Mie-Logo.svg';
 
 // Import gallery images
 import gallery1 from '../../public/images/gallery/german_gallery.jpg';
 import gallery3 from '../../public/images/gallery/sweet_potato_gallery.jpg';
 import gallery4 from '../../public/images/gallery/strawberry_gallery.jpg';
-// Add any other gallery images you have
 
 // Import the useSort hook
 import { useSort } from '../hooks/useSort';
@@ -52,11 +53,11 @@ export default function Home() {
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
 
       <main>
-        <section className="relative mb-8">
+        <section className="relative mb-4">
           <HeroCarousel images={galleryImages} />
         </section>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-16">
           <ProductGrid 
             sortedItems={sortedItems}
             sortOption={sortOption}
@@ -102,10 +103,20 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Decorative Elements */}
+            {/* Decorative Elements with Logo */}
             <div className="grid grid-cols-3 gap-8 mt-16">
               <div className="aspect-square bg-orange-100 rounded-full opacity-20"></div>
-              <div className="aspect-square bg-orange-200 rounded-full opacity-30 transform translate-y-8"></div>
+              <div className="relative aspect-square">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Image
+                    src={logo}
+                    alt="Mie Gourmet Logo"
+                    width={280}
+                    height={280}
+                    className="opacity-80 scale-125"
+                  />
+                </div>
+              </div>
               <div className="aspect-square bg-orange-100 rounded-full opacity-20"></div>
             </div>
           </div>
